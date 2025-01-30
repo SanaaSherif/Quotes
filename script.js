@@ -3,9 +3,10 @@ const newQuoteBtn = document.getElementById('new-quote');
 
 async function getQuote() {
     try {
-        const response = await fetch('https://zenquotes.io/api/random');
+        const response = await fetch('https://api.allorigins.win/get?url=https://zenquotes.io/api/random');
         const data = await response.json();
-        quoteText.innerText = `"${data[0].q}" — ${data[0].a}`;
+        const parsedData = JSON.parse(data.contents);
+        quoteText.innerText = `"${parsedData[0].q}" — ${parsedData[0].a}`;
     } catch (error) {
         quoteText.innerText = "Oops! Couldn't fetch a quote. Try again!";
     }
